@@ -1,0 +1,16 @@
+<div class="d-flex position-fixed wrapper">
+  <div class="sidebar">
+    <app-sidebar [show]="show"></app-sidebar>
+  </div>
+
+  <!-- Page Content -->
+  <div class="page-content">
+    <app-header (toggle)="toggleHandler($event)"></app-header>
+
+    <div class="container-fluid main-container p-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->

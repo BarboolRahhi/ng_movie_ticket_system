@@ -1,0 +1,105 @@
+<div class="col-md-6 p-0 mx-auto my-5">
+  <div class="p-3 bg-white shadow-lg rounded">
+    <form
+      [formGroup]="theaterForm"
+      *ngIf="!isEditMode || (theater | async)"
+      (ngSubmit)="addTheater()"
+    >
+      <div class="">
+        <div class="form-group">
+          <label for="idp">Theater Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tname"
+            placeholder="Enter theater name"
+            formControlName="theaterName"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.theaterName.invalid && form.theaterName.touched"
+          >
+            Please enter the theater name.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productname">Theater City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tcity"
+            placeholder="Enter theater city"
+            formControlName="theaterCity"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.theaterName.invalid && form.theaterName.touched"
+          >
+            Please enter the theater name.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productname">Manager Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mName"
+            placeholder="Enter manager name"
+            formControlName="managerName"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.managerName.invalid && form.managerName.touched"
+          >
+            Please enter the manager name.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productname">Manager Contact</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mCity"
+            placeholder="Enter manager contact"
+            formControlName="managerContact"
+          />
+          <div class="text-danger" *ngIf="form.managerContact.touched">
+            <p *ngIf="form.managerContact.errors?.required">
+              Manager Contact is a required field!
+            </p>
+            <p *ngIf="form.managerContact.errors?.pattern">
+              This is not a valid Contact Number
+            </p>
+            <p
+              *ngIf="
+                form.managerContact.errors?.minlength ||
+                form.managerContact.errors?.maxlength
+              "
+            >
+              Contact Number must be 10 digit
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!theaterForm.valid"
+          class="btn btn-primary mt-2"
+        >
+          Save Theater
+        </button>
+        <button
+          type="button"
+          class="btn btn-dark mt-2 float-right"
+          (click)="close()"
+        >
+          Close
+        </button>
+      </div>
+    </form>
+    <ng-template #loading> Lodaing... </ng-template>
+  </div>
+</div>

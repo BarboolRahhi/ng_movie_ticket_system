@@ -1,0 +1,187 @@
+<div class="col-md-6 p-0 mx-auto my-5">
+  <div class="p-3 bg-white shadow-lg rounded">
+    <form
+      [formGroup]="movieForm"
+      *ngIf="!isEditMode || (movie | async)"
+      (ngSubmit)="addTheater()"
+    >
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="idp">Movie Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tname"
+            placeholder="Enter movie name"
+            formControlName="movieName"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.movieName.invalid && form.movieName.touched"
+          >
+            Please enter the movie name.
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="productname">Movie Genre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tcity"
+            placeholder="Enter movie genre"
+            formControlName="movieGenre"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.movieGenre.invalid && form.movieGenre.touched"
+          >
+            Please enter the movie genre
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="productname">Movie Director</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mName"
+            placeholder="Enter movieDirector "
+            formControlName="movieDirector"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.movieDirector.invalid && form.movieDirector.touched"
+          >
+            Please enter the movie director name.
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="productname">Movie Release Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="movieReleaseDate"
+            placeholder="Enter movie release date "
+            formControlName="movieReleaseDate"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              form.movieReleaseDate.invalid && form.movieReleaseDate.touched
+            "
+          >
+            Please enter the movie release date
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="productname">Movie Length</label>
+          <input
+            type="number"
+            class="form-control"
+            id="mCity"
+            placeholder="Enter manager contact"
+            formControlName="movieLength"
+          />
+          <div class="text-danger" *ngIf="form.movieLength.touched">
+            <p *ngIf="form.movieLength.errors?.required">
+              Movie Length is a required field!
+            </p>
+            <p
+              *ngIf="
+                form.movieLength.errors?.min || form.movieLength.errors?.max
+              "
+            >
+              Movie Length must be 1 to 4
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="category">Theater</label>
+          <select id="theater" class="form-control" formControlName="theaterId">
+            <option [ngValue]="null" disabled>Choose the theater</option>
+            <option
+              *ngFor="let theater of theaters | async"
+              [ngValue]="theater.theaterId"
+            >
+              {{ theater.theaterName }}
+            </option>
+          </select>
+          <div
+            class="text-danger"
+            *ngIf="this.form.theaterId.invalid && this.form.touched"
+          >
+            Please select the theater
+          </div>
+        </div>
+
+        <div class="form-row ml-md-1 my-2 col-md-12">
+          <h5>Add Movie Languages</h5>
+          <button
+            type="button"
+            class="btn btn-sm btn-success ml-3"
+            (click)="onLanguageAdd()"
+          >
+            <fa-icon class="faIcon" [icon]="faPlus"></fa-icon>
+          </button>
+        </div>
+
+        <div formArrayName="languages" class="col-md-12">
+          <div
+            class="form-row"
+            *ngFor="let language of lang.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div class="form-group col-md-10">
+              <input
+                type="text"
+                class="form-control"
+                id="infourl"
+                placeholder="Enter the language"
+                formControlName="name"
+              />
+            </div>
+
+            <div class="col-md-2">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onLanguageRemove(i)"
+              >
+                <fa-icon class="faIcon" [icon]="faTrash"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="text-danger ml-md-1"
+          *ngIf="lang.invalid && (lang.dirty || lang.touched)"
+        >
+          Please enter the languages
+        </div>
+
+        <div class="col-md-12">
+          <button
+            type="submit"
+            [disabled]="!movieForm.valid"
+            class="btn btn-primary mt-2"
+          >
+            Save Movie
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark mt-2 float-right"
+            (click)="close()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </form>
+    <ng-template #loading> Lodaing... </ng-template>
+  </div>
+</div>

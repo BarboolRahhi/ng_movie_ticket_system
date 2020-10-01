@@ -1,0 +1,16 @@
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 32px;
+  margin-right: 12px;
+}
+
+.logo span {
+  color: #1d1e33ea;
+  letter-spacing: 2px;
+  font-size: 1.6rem;
+  font-family: "Bangers", cursive;
+}

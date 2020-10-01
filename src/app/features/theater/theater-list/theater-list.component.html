@@ -1,0 +1,64 @@
+<div class="p-3 bg-white shadow-sm rounded mb-5 mt-2">
+  <div class="">
+    <button class="btn btn-dark" type="button" routerLink="add">
+      <fa-icon class="faIcon mr-2" [icon]="faPlus"></fa-icon> Add Theater
+    </button>
+  </div>
+  <table class="table table-bordered mt-3 table-sm table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th
+          *ngFor="let column of columnList"
+          scope="col"
+          (click)="onSortedClick(column.key)"
+        >
+          {{ column.name }}
+          <fa-icon
+            *ngIf="isOrderAscOrDesc && sortedColumn === column.key"
+            [icon]="faArrowDown"
+          ></fa-icon>
+          <fa-icon
+            *ngIf="!isOrderAscOrDesc && sortedColumn === column.key"
+            [icon]="faArrowUp"
+          ></fa-icon>
+        </th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let theater of theaters | sortBy: sortedOrder:sortedColumn;
+          let sno = index
+        "
+      >
+        <td>{{ sno + 1 }}</td>
+        <td>{{ theater.theaterName }}</td>
+        <td>{{ theater.theaterCity }}</td>
+        <td>{{ theater.managerName }}</td>
+        <td>{{ theater.managerContact }}</td>
+
+        <td>
+          <button
+            type="button"
+            class="btn btn-info btn-sm"
+            (click)="onEdit(theater.theaterId)"
+          >
+            <fa-icon class="faIcon" [icon]="faEdit"></fa-icon> Edit
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="onDelete(theater.theaterId)"
+          >
+            <fa-icon class="faIcon" [icon]="faTrash"></fa-icon> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

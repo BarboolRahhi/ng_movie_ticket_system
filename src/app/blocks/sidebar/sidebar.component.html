@@ -1,0 +1,46 @@
+<!-- Sidebar -->
+<div
+  class="side-bar-bg text-white"
+  [ngClass]="{ 'side-bar-active': show }"
+  id="sidebar-wrapper"
+>
+  <div class="sidebar-heading border-bottom border-light">Admin Panel</div>
+  <div class="list-group list-group-flush" *ngIf="authenticate">
+    <a
+      class="list-group-item list-group-item-action"
+      routerLink="/theater"
+      routerLinkActive="active"
+      ><fa-icon class="faIcon" [icon]="faFilm"></fa-icon>Theater</a
+    >
+    <a
+      routerLink="/movie"
+      routerLinkActive="active"
+      class="list-group-item list-group-item-action"
+      ><fa-icon class="faIcon" [icon]="faTicketAlt"></fa-icon>Movie</a
+    >
+    <a
+      class="list-group-item list-group-item-action"
+      routerLink="/screen"
+      routerLinkActive="active"
+      ><fa-icon class="faIcon" [icon]="faDesktop"></fa-icon>Screen</a
+    >
+    <a
+      class="list-group-item list-group-item-action"
+      routerLink="/user"
+      routerLinkActive="active"
+      ><fa-icon class="faIcon" [icon]="faUser"></fa-icon>User</a
+    >
+    <a class="list-group-item list-group-item-action mt-4" (click)="logOut()"
+      ><fa-icon class="faIcon" [icon]="faSignOutAlt"></fa-icon>Log Out</a
+    >
+  </div>
+  <div class="list-group list-group-flush" *ngIf="!authenticate">
+    <a
+      class="list-group-item list-group-item-action"
+      routerLink="/auth"
+      routerLinkActive="active"
+      ><fa-icon class="faIcon" [icon]="faSignInAlt"></fa-icon>Login</a
+    >
+  </div>
+</div>
+<!-- /#sidebar-wrapper -->

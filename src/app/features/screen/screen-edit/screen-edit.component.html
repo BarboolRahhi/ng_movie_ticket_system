@@ -1,0 +1,103 @@
+<div class="col-md-6 p-0 mx-auto my-5">
+  <div class="p-3 bg-white shadow-lg rounded">
+    <form
+      [formGroup]="screenForm"
+      *ngIf="!isEditMode || (screen | async)"
+      (ngSubmit)="addTheater()"
+    >
+      <div class="">
+        <div class="form-group">
+          <label for="idp">Screen Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tname"
+            placeholder="Enter screen name"
+            formControlName="screenName"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.screenName.invalid && form.screenName.touched"
+          >
+            Please enter the screen name
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productname">Rows</label>
+          <input
+            type="number"
+            class="form-control"
+            id="mCity"
+            placeholder="Enter rows"
+            formControlName="rows"
+          />
+          <div class="text-danger" *ngIf="form.rows.touched || form.rows.dirty">
+            <p *ngIf="form.rows.errors?.required">Row is a required field!</p>
+            <p *ngIf="form.rows.errors?.min || form.rows.errors?.max">
+              Row must be 1 to 10
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productname">Columns</label>
+          <input
+            type="number"
+            class="form-control"
+            id="columns"
+            placeholder="Enter columns"
+            formControlName="columns"
+          />
+          <div
+            class="text-danger"
+            *ngIf="form.columns.touched || form.columns.dirty"
+          >
+            <p *ngIf="form.columns.errors?.required">
+              Columns is a required field!
+            </p>
+            <p *ngIf="form.columns.errors?.min || form.columns.errors?.max">
+              columns must be 1 to 10
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Theater</label>
+          <select id="theater" class="form-control" formControlName="theaterId">
+            <option [ngValue]="null" disabled>Choose the theater</option>
+            <option
+              *ngFor="let theater of theaters | async"
+              [ngValue]="theater.theaterId"
+            >
+              {{ theater.theaterName }}
+            </option>
+          </select>
+          <div
+            class="text-danger"
+            *ngIf="this.form.theaterId.invalid && this.form.touched"
+          >
+            Please select the theater
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <button
+            type="submit"
+            [disabled]="!screenForm.valid"
+            class="btn btn-primary mt-2"
+          >
+            Save Screen
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark mt-2 float-right"
+            (click)="close()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
